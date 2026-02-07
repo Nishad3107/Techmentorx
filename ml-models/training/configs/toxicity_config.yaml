@@ -1,0 +1,29 @@
+model:
+  name: "unitary/toxic-bert"
+  version: "1.0.0"
+  num_labels: 6  # toxicity, severe_toxicity, obscene, threat, insult, identity_attack
+
+training:
+  output_dir: "../../trained/toxicity/v1.0.0"
+  epochs: 3
+  batch_size: 16
+  learning_rate: 2e-5
+  warmup_steps: 500
+  weight_decay: 0.01
+  
+data:
+  train_path: "../datasets/toxicity/train.csv"
+  val_path: "../datasets/toxicity/val.csv"
+  test_path: "../datasets/toxicity/test.csv"
+  max_length: 512
+  
+fairness:
+  enabled: true
+  protected_attributes: ["gender", "race", "age_group"]
+  demographic_parity_threshold: 0.1
+  equal_opportunity_threshold: 0.1
+  
+logging:
+  use_wandb: true
+  project_name: "toxicity-detection"
+  log_interval: 100

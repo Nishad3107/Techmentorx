@@ -1,0 +1,112 @@
+{
+  "models": [
+    {
+      "name": "toxicity_detector",
+      "version": "1.0.0",
+      "type": "classification",
+      "base_model": "unitary/toxic-bert",
+      "description": "Multi-label toxicity classification model",
+      "labels": ["toxicity", "severe_toxicity", "obscene", "threat", "insult", "identity_attack"],
+      "status": "active",
+      "metrics": {
+        "accuracy": 0.942,
+        "f1_score": 0.928,
+        "precision": 0.935,
+        "recall": 0.921
+      },
+      "fairness_metrics": {
+        "demographic_parity": 0.087,
+        "equal_opportunity": 0.092,
+        "passes_fairness": true
+      },
+      "deployment": {
+        "environment": "production",
+        "endpoint": "/api/content/analyze",
+        "last_updated": "2024-01-15T10:30:00Z"
+      }
+    },
+    {
+      "name": "sentiment_analyzer",
+      "version": "1.0.0",
+      "type": "classification",
+      "base_model": "cardiffnlp/twitter-roberta-base-sentiment",
+      "description": "Sentiment analysis model for social media content",
+      "labels": ["negative", "neutral", "positive"],
+      "status": "active",
+      "metrics": {
+        "accuracy": 0.918,
+        "f1_score": 0.905,
+        "precision": 0.912,
+        "recall": 0.898
+      },
+      "fairness_metrics": {
+        "demographic_parity": 0.065,
+        "equal_opportunity": 0.071,
+        "passes_fairness": true
+      },
+      "deployment": {
+        "environment": "production",
+        "endpoint": "/api/content/sentiment",
+        "last_updated": "2024-01-15T10:30:00Z"
+      }
+    },
+    {
+      "name": "misinformation_detector",
+      "version": "0.9.0",
+      "type": "classification",
+      "base_model": "roberta-base",
+      "description": "Misinformation and fake news detection model",
+      "labels": ["credible", "questionable", "misinformation"],
+      "status": "beta",
+      "metrics": {
+        "accuracy": 0.875,
+        "f1_score": 0.862,
+        "precision": 0.881,
+        "recall": 0.844
+      },
+      "fairness_metrics": {
+        "demographic_parity": 0.098,
+        "equal_opportunity": 0.103,
+        "passes_fairness": false
+      },
+      "deployment": {
+        "environment": "staging",
+        "endpoint": "/api/content/misinformation",
+        "last_updated": "2024-01-10T14:20:00Z"
+      },
+      "notes": "Under retraining for improved fairness metrics"
+    },
+    {
+      "name": "age_rating_classifier",
+      "version": "1.0.0",
+      "type": "classification",
+      "base_model": "bert-base-uncased",
+      "description": "Age appropriateness classification model",
+      "labels": ["G", "PG", "PG-13", "R"],
+      "status": "active",
+      "metrics": {
+        "accuracy": 0.893,
+        "f1_score": 0.885,
+        "precision": 0.891,
+        "recall": 0.879
+      },
+      "fairness_metrics": {
+        "demographic_parity": 0.072,
+        "equal_opportunity": 0.068,
+        "passes_fairness": true
+      },
+      "deployment": {
+        "environment": "production",
+        "endpoint": "/api/content/age-rating",
+        "last_updated": "2024-01-15T10:30:00Z"
+      }
+    }
+  ],
+  "metadata": {
+    "last_updated": "2024-01-15T10:30:00Z",
+    "registry_version": "1.0.0",
+    "total_models": 4,
+    "active_models": 3,
+    "beta_models": 1
+  }
+}
